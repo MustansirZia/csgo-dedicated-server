@@ -8,7 +8,7 @@
 <br />
 
 
-The Dockerfile will build an image for running a Counter-Strike: Global Offensive dedicated server in a container.
+The Dockerfile will build an image for running a Counter-Strike: Global Offensive dedicated server in a container. (<b>GL HF!</b>)
 
 Base Image - [https://github.com/kaimallea/csgo](https://github.com/kaimallea/csgo)
 
