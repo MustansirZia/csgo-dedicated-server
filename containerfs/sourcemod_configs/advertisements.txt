@@ -1,0 +1,51 @@
+// Advertisements 2.0
+// by Tsunami
+//
+// Types
+// -----
+// center: Center message
+// chat: Chat message
+// hint: Hint message
+// menu: Menu message
+// top: Top message
+//
+// Flags (optional)
+// -----
+// Accepts flags of admins that will not see the advertisement.
+// When omitted everyone will see the advertisement.
+// When left empty only admins will see the advertisement.
+
+"Advertisements"
+{
+    "1"
+    {
+        "hint"		"Welcome to Crossfire Kashmir's Retake Server"
+    }
+    "2"
+    {
+        "chat"		"{yellow} Join Crossfire's Discord Server; https://discord.gg/FC3U5Z7"
+        "hint"			" Contact Admin on Discord ALPHA#0067 for VIP"
+    }
+    "3"
+    {
+        "chat"			"{red} Anti Cheat is ON! If you are caught cheating then Seedhey Mout Koulle Manz Peth Latte Mond."
+    }
+    "4"
+    {
+        "chat"			"{blue} Server Developer - MZ | Server Maintainer - Alpha"
+        
+    }
+     "5"
+    {
+        "chat"		"{green} type !guns in chat to select your gun preference"
+    }
+	 "6"
+    {
+        "chat"		"{green} type !ws and !knife in chat to select your skins and knife"
+	
+    }
+	 "7"
+    {
+        "chat"		"{yellow} type !calladmin in chat to report a player"
+    }
+}

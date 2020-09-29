@@ -1,0 +1,45 @@
+version: "3.3"
+
+volumes:
+  csgo-data:
+
+services:
+  csgo:
+    build: 
+      context: .
+    container_name: csgo-ds
+
+    environment:
+      SERVER_HOSTNAME: "Crossfire Kashmir's Retake Server | 64tick | FreeToPlay"
+      SERVER_PASSWORD: "password"
+      RCON_PASSWORD: rconpassword
+      STEAM_ACCOUNT: CHANGE_THIS
+      AUTHKEY: changeme
+      SOURCEMOD_ADMINS: STEAM_0:1:545476030,STEAM_0:1:231043609,STEAM_0:1:44087093
+      IP: 0.0.0.0
+      PORT: 27015
+      TV_PORT: 27020
+      TICKRATE: 64
+      FPS_MAX: 200
+      GAME_TYPE: 0
+      GAME_MODE: 1
+      MAP: de_dust2
+      MAPGROUP: mg_active
+      MAXPLAYERS: 12
+      TV_ENABLE: 0
+      LAN: 0
+      RETAKES: 0
+
+    volumes:
+      - csgo-data:/home/steam/csgo
+
+    ports:
+      - "27015:27015"  
+      - "27020:27020"  
+      - "23:23"  
+
+    network_mode: "host"
+
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
