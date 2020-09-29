@@ -1,6 +1,13 @@
 # CSGO containerized
 
+<p float="center">
 <img src="https://github.com/MustansirZia/csgo-dedicated-server/raw/master/logo.png" alt="logo">
+
+<img src="https://www.docker.com/sites/default/files/d8/2019-07/Moby-logo.png" alt="docker-logo">
+
+</p>
+
+
 
 The Dockerfile will build an image for running a Counter-Strike: Global Offensive dedicated server in a container.
 
