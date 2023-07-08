@@ -28,12 +28,18 @@ export TV_ENABLE="${TV_ENABLE:-1}"
 export LAN="${LAN:-0}"
 export SOURCEMOD_ADMINS="${SOURCEMOD_ADMINS:-}"
 export RETAKES="${RETAKES:-0}"
+export ANNOUNCEMENT_IP="${ANNOUNCEMENT_IP:-}"
+export NOMASTER="${NOMASTER:-}"
 
 # Attempt to update CSGO before starting the server
 
 [[ -z ${CI+x} ]] && "$STEAMCMD_DIR/steamcmd.sh" +login anonymous +force_install_dir "$CSGO_DIR" +app_update "$CSGO_APP_ID" +quit
 
-# Create dynamic autoexec config
+
+ # Create dynamic autoexec config
+mkdir -p "$CSGO_DIR/csgo/cfg"
+
+if [ ! -s "$CSGO_DIR/csgo/cfg/autoexec.cfg" ]; then
 cat << AUTOEXECCFG > "$CSGO_DIR/csgo/cfg/autoexec.cfg"
 log on
 hostname "$SERVER_HOSTNAME"
@@ -43,8 +49,15 @@ sv_cheats 0
 exec banned_user.cfg
 exec banned_ip.cfg
 AUTOEXECCFG
+else
+sed -i "s/^hostname.*/hostname \"$SERVER_HOSTNAME\"/" $CSGO_DIR/csgo/cfg/autoexec.cfg
+sed -i "s/^rcon_password.*/rcon_password \"$RCON_PASSWORD\"/" $CSGO_DIR/csgo/cfg/autoexec.cfg
+sed -i "s/^sv_password.*/sv_password \"$SERVER_PASSWORD\"/" $CSGO_DIR/csgo/cfg/autoexec.cfg
+
+fi
 
 # Create dynamic server config
+if [ ! -s "$CSGO_DIR/csgo/cfg/server.cfg" ]; then
 cat << SERVERCFG > "$CSGO_DIR/csgo/cfg/server.cfg"
 tv_enable $TV_ENABLE
 tv_delaymapchange 1
@@ -61,6 +74,14 @@ tv_transmitall 1
 writeid
 writeip
 SERVERCFG
+
+else
+sed -i "s/^tv_enable.*/tv_enable $TV_ENABLE/" $CSGO_DIR/csgo/cfg/server.cfg
+
+fi
+
+# Attempt to update CSGO before starting the server
+[[ -z ${CI+x} ]] && "$STEAMCMD_DIR/steamcmd.sh" +login anonymous +force_install_dir "$CSGO_DIR" +app_update "$CSGO_APP_ID" +quit
 
 # Install and configure plugins & extensions
 "$BASH" "$STEAM_DIR/manage_plugins.sh"
@@ -100,6 +121,14 @@ fi
 
 if [[ -n $WORKSHOP_START_MAP ]]; then
   SRCDS_ARGUMENTS+=("+workshop_start_map $WORKSHOP_START_MAP")
+fi
+
+if [[ -n $ANNOUNCEMENT_IP ]]; then
+  SRCDS_ARGUMENTS+=("+net_public_adr $ANNOUNCEMENT_IP")
+fi
+
+if [[ $NOMASTER == 1 ]]; then
+  SRCDS_ARGUMENTS+=("-nomaster")
 fi
 
 SRCDS_RUN="$CSGO_DIR/srcds_run"
