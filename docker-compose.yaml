@@ -8,6 +8,7 @@ services:
     build: 
       context: .
     container_name: csgo-ds
+    privileged: true
 
     environment:
       SERVER_HOSTNAME: "Crossfire Kashmir's Retake Server | 64tick | FreeToPlay"
