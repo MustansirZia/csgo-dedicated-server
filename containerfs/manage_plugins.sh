@@ -9,7 +9,7 @@ export RETAKES="${RETAKES:-0}"
 INSTALL_PLUGINS="${INSTALL_PLUGINS:-https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1148-linux.tar.gz
 https://sm.alliedmods.net/smdrop/1.11/sourcemod-1.11.0-git6934-linux.tar.gz
 http://users.alliedmods.net/~kyles/builds/SteamWorks/SteamWorks-git131-linux.tar.gz
-https://ptah.zizt.ru/files/PTaH-V1.1.2-build18-linux.zip
+https://github.com/komashchenko/PTaH/releases/download/v1.1.4/linux.zip
 https://bitbucket.org/GoD_Tony/updater/downloads/updater.smx
 https://github.com/ErikMinekus/sm-advertisements/releases/latest/download/release.tar.gz
 https://github.com/eedson/Cow-Anti-Cheat/raw/master/CowAntiCheat.smx
@@ -57,10 +57,10 @@ create_install_marker() {
 install_plugin() {
   filename=${1##*/}
   filename_ext=$(echo "${1##*.}" | awk '{print tolower($0)}')
-  if ! file_url_exists "$1"; then
-    echo "Plugin download check FAILED for $filename";
-    return 0
-  fi
+  # if ! file_url_exists "$1"; then
+  #   echo "Plugin download check FAILED for $filename";
+  #   return 0
+  # fi
   if ! is_plugin_installed "$1"; then
     echo "Downloading $1..."
     case "$filename_ext" in
